@@ -1,16 +1,17 @@
 # Server-side
 ## Install dependencies
 `npm install`
+## install mongo
+`brew install mongo`
+## launch mongod
+`mongod`
 ## Run Proxy Server
 `npm run launchProxy`
 ## Run Server
 `npm run launchServer`
 ## Set the proxy
 Go to network/wifi setting: set the proxy up for http and https: to 127.0.0.1, port 8124
-## install mongo
-`brew install mongo`
-## launch mongod
-`mongod`
+
 
 # Client
 `cd client`
