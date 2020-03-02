@@ -40,23 +40,23 @@ exports.getOrRegister = async ({ https, port, domain, subdomain, ip }) => {
   });
   if (mongoAddress) return mongoAddress;
   if (dbAddress.subdomains.filter((subd) => subd.name === subdomain).length === 0) {
-    dbAddress.subdomains = [dbAddress.subdomains, { name: subdomain, ips: [ip] }];
-    delete dbAddress.__v
+    dbAddress.subdomains = [...dbAddress.subdomains, { name: subdomain, ips: [ip] }];
     dbAddress.save();
-  } else if (
-    dbAddress.subdomains
-      .filter((subd) => subd.name === subdomain)[0].ips
-      .filter((subdIp) => subdIp === ip)
-      .length
-      === 0) {
-    dbAddress.subdomains = dbAddress.subdomains.map(sub => {
-      if (sub.name !== subdomain) return sub
-      else return {name: subdomain, ips: [...sub.ips, ip] }
-    });
-    delete dbAddress.__v
-    dbAddress.save();
-    console.log('Already saved but new IP! ', dbAddress.domain);
-  } else {
+  } 
+  // else if (
+  //   dbAddress.subdomains
+  //     .filter((subd) => subd.name === subdomain)[0].ips
+  //     .filter((subdIp) => subdIp === ip)
+  //     .length
+  //     === 0) {
+  //   dbAddress.subdomains = dbAddress.subdomains.map(sub => {
+  //     if (sub.name !== subdomain) return sub
+  //     else return {name: subdomain, ips: [...sub.ips, ip] }
+  //   });
+  //   dbAddress.save();
+  //   console.log('Already saved but new IP! ', dbAddress.domain);
+  // } 
+  else {
     console.log('Already saved', dbAddress.domain);
   }
   return dbAddress;

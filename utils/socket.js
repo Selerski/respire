@@ -19,7 +19,10 @@ exports.retrieveAddressFromSocketData = async (data) => {
     host = data.toString()
       .split('Host: ')[1].split('\r\n')[0];
   }
-  const lookup = await dnsLookup(host).catch(() => { valid = false; });
+  const lookup = await dnsLookup(host).catch(() => { 
+    console.log('DNS ERRRO', host);
+    valid = false;
+  });
   if (host.split(':')[0] === 'localhost') {
     host = host.split(':')[0];
     port = host.split(':')[1];
@@ -27,11 +30,8 @@ exports.retrieveAddressFromSocketData = async (data) => {
   }
   const ip = lookup;
   let [geo, domain, ...subdomain] = host.slice().split('.').reverse();
-  subdomain = subdomain.length === 0 ? '' : subdomain.join('.');
+  subdomain = subdomain.length === 0 ? '' : subdomain.reverse().join('.');
   domain = [domain,geo].join('.');
-  console.log('domain', domain);
-  console.log('geo', geo);
-  if (subdomain === "www.") console.log("HAAAAAAAAAAAAAAAAAAAAAH");
   return {
     https: isTLSConnection, port, ip, valid, domain, subdomain,
   };

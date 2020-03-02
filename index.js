@@ -12,6 +12,8 @@ server.on('error', (err) => {
   console.log(err);
 });
 
+const QueuedAddresses = new Map();
+
 
 // When there is a connection to the server: anytime a user wants to use the internet 
 // since the proxy server has been setup.
@@ -20,15 +22,17 @@ server.on('connection', (clientToProxySocket) => {
   // When a socket has been created between the client and the proxy
   // Let's retrieve and forward the data to the expected address.
   clientToProxySocket.once('data', async (data) => {
-    console.log('once data')
     const fullAddress = await retrieveAddressFromSocketData(data);
     if (!fullAddress.valid) {console.log('NOT VALID', fullAddress)}
     if (!fullAddress.valid) return;
     console.log(fullAddress.subdomain === '' ? fullAddress.domain : [fullAddress.subdomain, fullAddress.domain].join('.'));
     //We register the address in our database
-    const dbAddress = await getOrRegister(fullAddress).catch(err => console.log('GETORREGISTERERROR', err));
     // We create the forwarding socket, that will send data to the requested address
     try {
+      if (QueuedAddresses.get(QueuedAddresses.domain)) return;
+      QueuedAddresses.set(QueuedAddresses.domain, true);
+      const dbAddress = await getOrRegister(fullAddress).catch(err => console.log('GETORREGISTERERROR', err));
+      QueuedAddresses.set(QueuedAddresses.domain, false);
       if (dbAddress.blocked) {
         console.log("THIS IS BLOCKED", dbAddress.domain);
         return;
