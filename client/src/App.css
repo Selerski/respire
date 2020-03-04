@@ -2,15 +2,62 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Header {
+  font-size: 2vw;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.ListHeader {
+  background-color: red;
+  font-size: 1.5vw;
+  margin-left: 30vw;
+  margin-right: 30vw;
+}
+.ListHeader2 {
+  background-color: violet;
+  font-size: 1.5vw;
+  margin-left: 30vw;
+  margin-right: 30vw;
+  color: white;
+}
+
+.LockForm {
+  font-size: 1.5vw;
+  background-color: green;
+}
+.UnblockImpossible {
+  background-color: hotpink;
+  font-size: 1.2vw;
+}
+
+.SubdomainTitle {
+  background-color: salmon;
+  color: black;
+  font-size: 1.1vw;
+  margin-left: 18vw;
+  margin-right: 18vw;
+}
+
+.Subdomain {
+  background-color: skyblue;
+  color: black;
+  font-size: 0.9vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+.BlockButton {
+  background-color: red;
+  font-size: 0.8vw;
+}
+
+.BlockSelect {
+  background-color: hotpink;
+  font-size: 0.8vw;
+}
+
+.Details {
+  background-color: yellow;
+  font-size: 0.6vw;
 }
 
 .Addresses {
@@ -26,20 +73,6 @@
   display: inline-block;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
 
 .addresses {
   display: inline;
@@ -53,4 +86,7 @@
   to {
     transform: rotate(360deg);
   }
+}
+p {
+  background-color: black;
 }

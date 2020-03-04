@@ -12,7 +12,9 @@ const addressSchema = new Schema({
   port: Number,
   domain: String,
   subdomains: [subdomainSchema],
-  blocked: { type: Boolean, default: false },
+  blockedStatus: { type: String, default: 'notBlocked' },
+  blockedDate: Date,
+  blockedTimePeriod: Number,
 });
 
 const Address = mongoose.model('Addresses', addressSchema);

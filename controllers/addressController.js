@@ -12,15 +12,24 @@ exports.getAddress = async (ctx) => {
 
 exports.blockAddress = async (ctx) => {
   const address = await Address.findById(ctx.params.id);
-  address.blocked = true;
-  address.save();
+  address.blockedStatus = 'Blocked';
+  await address.save();
   ctx.body = address;
 };
 
 exports.unblockAddress = async (ctx) => {
   const address = await Address.findById(ctx.params.id);
-  address.blocked = false;
-  address.save();
+  address.blockedStatus = 'notBlocked';
+  await address.save();
+  ctx.body = address;
+};
+
+exports.timeBlockAddress = async (ctx) => {
+  const address = await Address.findById(ctx.params.id);
+  address.blockedStatus = 'timeBlocked';
+  address.blockedDate = Date.now();
+  address.blockedTimePeriod = ctx.query.time;
+  await address.save();
   ctx.body = address;
 };
 
@@ -60,4 +69,14 @@ exports.getOrRegister = async ({ https, port, domain, subdomain, ip }) => {
     console.log('Already saved', dbAddress.domain);
   }
   return dbAddress;
+};
+
+exports.unBlockExpiredAddress = async () => {
+  const addresses = await Address.find({ blockedStatus: 'timeBlocked'});
+  addresses.forEach((dbAddress) => {
+    if (Date.parse(dbAddress.blockedDate) - Date.now() + dbAddress.blockedTimePeriod < 0) {
+      console.log(dbAddress);
+      exports.unblockAddress({ params: { id: dbAddress._id } });
+    }
+  });
 };

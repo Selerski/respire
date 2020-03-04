@@ -7,6 +7,7 @@ exports.retrieveAddressFromSocketData = async (data) => {
   let host;
   let valid = true;
 
+
   if (isTLSConnection) {
     // Port changed to 443, parsing the host from CONNECT
     port = 443;
@@ -24,14 +25,14 @@ exports.retrieveAddressFromSocketData = async (data) => {
     valid = false;
   });
   if (host.split(':')[0] === 'localhost') {
-    host = host.split(':')[0];
-    port = host.split(':')[1];
+    [host, port] = host.split(':');
+    valid = true;
     isTLSConnection = false;
   }
   const ip = lookup;
   let [geo, domain, ...subdomain] = host.slice().split('.').reverse();
   subdomain = subdomain.length === 0 ? '' : subdomain.reverse().join('.');
-  domain = [domain,geo].join('.');
+  domain = !domain ? geo : [domain, geo].join('.');
   return {
     https: isTLSConnection, port, ip, valid, domain, subdomain,
   };

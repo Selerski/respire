@@ -15,3 +15,9 @@ exports.unblockAddress = async (id) => {
     method: 'PUT'
   }).then( x => x.json())
 }
+
+exports.timeBlockAddress = async (id, time) => {
+  return fetch(`${baseURL}/${id}/timeblock/?time=${time}`, {
+    method: 'PUT'
+  }).then( x => x.json())
+}
