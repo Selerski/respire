@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000/addresses'
+const baseURL = 'http://localhost:3003/addresses'
 
 exports.getAddresses = async () => {
   return fetch(baseURL).then( x => x.json()).then( x => x.sort((a,b)=> a.domain < b.domain ? -1 : 1));

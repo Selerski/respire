@@ -68,9 +68,9 @@ exports.getOrRegister = async ({ https, port, domain, subdomain, ip }) => {
   // } 
 
 
-  // else {
-  //   console.log('Already saved', dbAddress.domain);
-  // }
+  else {
+    console.log('Already saved', dbAddress.domain);
+  }
   return dbAddress;
 };
 
