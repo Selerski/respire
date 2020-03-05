@@ -44,11 +44,12 @@ exports.getOrRegister = async ({ https, port, domain, subdomain, ip }) => {
         subdomains: [{ name: subdomain, ips: [ip] }],
       });
       await mongoAddress.save();
-      console.log('New address saved!: ', mongoAddress.domain);
+      // console.log('New address saved!: ', mongoAddress.domain);
     }
   });
   if (mongoAddress) return mongoAddress;
-  if (dbAddress.subdomains.filter((subd) => subd.name === subdomain).length === 0) {
+  
+  if (dbAddress.subdomains.filter((subd) => subd.name === subdomain).length === 0) { // make this a "find"
     dbAddress.subdomains = [...dbAddress.subdomains, { name: subdomain, ips: [ip] }];
     dbAddress.save();
   } 
@@ -65,9 +66,11 @@ exports.getOrRegister = async ({ https, port, domain, subdomain, ip }) => {
   //   dbAddress.save();
   //   console.log('Already saved but new IP! ', dbAddress.domain);
   // } 
-  else {
-    console.log('Already saved', dbAddress.domain);
-  }
+
+
+  // else {
+  //   console.log('Already saved', dbAddress.domain);
+  // }
   return dbAddress;
 };
 
@@ -75,7 +78,7 @@ exports.unBlockExpiredAddress = async () => {
   const addresses = await Address.find({ blockedStatus: 'timeBlocked'});
   addresses.forEach((dbAddress) => {
     if (Date.parse(dbAddress.blockedDate) - Date.now() + dbAddress.blockedTimePeriod < 0) {
-      console.log(dbAddress);
+      // console.log(dbAddress);
       exports.unblockAddress({ params: { id: dbAddress._id } });
     }
   });

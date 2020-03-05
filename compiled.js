@@ -29,7 +29,7 @@ server.on('connection', clientToProxySocket => {
     console.log('lookup' + '🚀', lookup); // return if the address is not valid, for instance google chrome search bar
 
     if (lookup === 'error') {
-      console.log('WROND ADDRESS🎌🎌🎌🎌 ');
+      console.log('WRONG ADDRESS🎌🎌🎌🎌 ');
       return;
     }
 
@@ -80,5 +80,5 @@ server.on('close', () => {
   console.log('Client Disconnected');
 });
 server.listen(8124, () => {
-  console.log('Server runnig at http://localhost:' + 8124);
+  console.log('Server running at http://localhost:' + 8124);
 });
