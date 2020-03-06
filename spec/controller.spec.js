@@ -1,5 +1,8 @@
 const mocks = require('./mocks');
-const { getAddresses, getAddress, blockAddress } = require('../controllers/addressController');
+const { getAddresses, 
+        getAddress, 
+        blockAddress, 
+        unblockAddress } = require('../controllers/addressController');
 
 describe("AddressController", function () {
   it("gets all addresses", async function () {
@@ -27,7 +30,13 @@ describe("AddressController", function () {
 
   });
 
-  it("correctly unblocks a given address");
+  it("correctly unblocks a given address", async function () {
+
+    let mockCtx = { params: {id: '1'}};
+    await unblockAddress({findById: () => mocks.blockedMock}, mockCtx);
+    expect(mockCtx.body.blockedStatus).toEqual('notBlocked');
+    mocks.blockedMock.blockedStatus = 'Blocked';
+  });
 
   it("blocks an address by time");
 

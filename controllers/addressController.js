@@ -17,8 +17,8 @@ exports.blockAddress = async (model=Address, ctx) => {
   ctx.body = address;
 };
 
-exports.unblockAddress = async (ctx) => {
-  const address = await Address.findById(ctx.params.id);
+exports.unblockAddress = async (model=Address, ctx) => {
+  const address = await model.findById(ctx.params.id);
   address.blockedStatus = 'notBlocked';
   await address.save();
   ctx.body = address;
