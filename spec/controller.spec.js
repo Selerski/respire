@@ -2,7 +2,8 @@ const mocks = require('./mocks');
 const { getAddresses, 
         getAddress, 
         blockAddress, 
-        unblockAddress } = require('../controllers/addressController');
+        unblockAddress,
+        timeBlockAddress } = require('../controllers/addressController');
 
 describe("AddressController", function () {
   it("gets all addresses", async function () {
@@ -38,7 +39,19 @@ describe("AddressController", function () {
     mocks.blockedMock.blockedStatus = 'Blocked';
   });
 
-  it("blocks an address by time");
+  it("blocks an address by time", async function () {
+
+    let timedMock = { save: () => {} };
+    let mockCtx = { params: {id: '1'}, query: { time: '60'}}
+    
+    await timeBlockAddress({findById: () => timedMock}, 1583507446982, mockCtx);
+    
+    expect(mockCtx.body.blockedStatus).toEqual('timeBlocked');
+    expect(mockCtx.body.blockedDate).toEqual(1583507446982);
+    expect(mockCtx.body.blockedTimePeriod).toEqual('60');
+    
+    timedMock = { save: () => {} };
+  });
 
   it("creates an address");
 

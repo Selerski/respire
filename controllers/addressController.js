@@ -24,10 +24,10 @@ exports.unblockAddress = async (model=Address, ctx) => {
   ctx.body = address;
 };
 
-exports.timeBlockAddress = async (ctx) => {
-  const address = await Address.findById(ctx.params.id);
+exports.timeBlockAddress = async (model=Address, date=Date.now(), ctx) => {
+  const address = await model.findById(ctx.params.id);
   address.blockedStatus = 'timeBlocked';
-  address.blockedDate = Date.now();
+  address.blockedDate = date;
   address.blockedTimePeriod = ctx.query.time;
   await address.save();
   ctx.body = address;
