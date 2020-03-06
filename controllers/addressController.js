@@ -5,8 +5,8 @@ exports.getAddresses = async (model=Address, ctx) => {
   ctx.body = addresses;
 };
 
-exports.getAddress = async (ctx) => {
-  const address = await Address.findById(ctx.params.id);
+exports.getAddress = async (model=Address, ctx) => {
+  const address = await model.findById(ctx.params.id);
   ctx.body = address;
 };
 

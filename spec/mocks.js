@@ -23,8 +23,8 @@ const blockedMock = {
 }
 
 const mockDB = {
-  find: () => [notBlockedMock, blockedMock],
-  findById: (id) => [notBlockedMock]
+  find: () => [blockedMock, notBlockedMock],
+  findById: (id) => notBlockedMock
 }
 
 module.exports = { notBlockedMock, blockedMock, mockDB }
