@@ -1,7 +1,7 @@
 const Address = require('../models/address');
 
-exports.getAddresses = async (ctx) => {
-  const addresses = await Address.find();
+exports.getAddresses = async (model=Address, ctx) => {
+  const addresses = await model.find();
   ctx.body = addresses;
 };
 
