@@ -3,12 +3,11 @@
   }
   
   body {
-    background: #673ab7;
     background: linear-gradient(to right, #512da8, #673ab7);
   }
   
   .field {
-    width: 100%;
+    width: 50%;
     height: 56px;
     border-radius: 4px;
     position: relative;

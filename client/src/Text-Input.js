@@ -28,9 +28,11 @@ function Input({ predicted, locked, id, active, value, error, label }) {
 
   return (
     <div className={fieldClassName}>
-      {/* {state.active && state.value && predicted && predicted === state.value && console.log(predicted) && (
-        <p className="predicted">{predicted}</p>
-      )} */}
+      {state.active &&
+        state.value &&
+        predicted &&
+        predicted === state.value &&
+        console.log(predicted) && <p className="predicted">{predicted}</p>}
       <input
         id={id}
         type="text"
@@ -41,6 +43,9 @@ function Input({ predicted, locked, id, active, value, error, label }) {
         onFocus={() => !locked && setState({ ...state, active: true })}
         onBlur={() => !state.locked && setState({ ...state, active: false })}
       />
+      <label htmlFor={id} className={error && 'error'}>
+        {error || label}
+      </label>
     </div>
   );
 }

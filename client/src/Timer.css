@@ -20,12 +20,13 @@
     margin: 0;
   }
   .rc-time-picker-clear-icon:after {
-    content: "X";
+    content: "x";
     font-size: 12px;
     font-style: normal;
     color: #aaa;
     display: inline-block;
     line-height: 1;
+    align-items: center;
     height: 20px;
     width: 20px;
     -webkit-transition: color 0.3s ease;
@@ -39,12 +40,12 @@
     position: relative;
     display: inline-block;
     padding: 4px 7px;
-    height: 28px;
+    height: 56px;
     cursor: text;
-    font-size: 12px;
+    font-size: 20px;
     line-height: 1.5;
     color: #666;
-    background-color: #fff;
+    background-color: #ede7f6;
     background-image: none;
     border: 1px solid #d9d9d9;
     border-radius: 4px;
@@ -67,6 +68,7 @@
   }
   .rc-time-picker-panel-inner {
     display: inline-block;
+    width: 225px;
     position: relative;
     outline: none;
     list-style: none;
@@ -85,6 +87,8 @@
   .rc-time-picker-panel-input {
     margin: 0;
     padding: 0;
+    font-size: 20px;
+    color: #673ab7;
     width: 100%;
     cursor: auto;
     line-height: 1.5;
@@ -108,8 +112,8 @@
     border-width: 0 1px;
     margin-left: -1px;
     box-sizing: border-box;
-    width: 98px;
-    max-height: 99px;
+    width: 112px;
+    max-height: 112px;
     overflow-y: auto;
     position: relative;
   }
@@ -130,13 +134,14 @@
   .rc-time-picker-panel-select ul {
     list-style: none;
     box-sizing: border-box;
+    font-size: 16px;
     margin: 0;
     padding: 0;
     width: 100%;
   }
   .rc-time-picker-panel-select li {
-    font-family: 'Chakra Petch', sans-serif;
-    color: purple;
+    font-family: 'Chakra Petch', sans-serif; 
+    color: #311b92;
     list-style: none;
     margin: 0;
     width: 100%;

@@ -1,12 +1,20 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import SubmitButton from '../Submit-Button';
 
 export default {
-  title: 'Submit Button',
-  component: SubmitButton,
+  component: { SubmitButton },
+  title: 'Text '
+  // Our exports that end in "Data" are not stories.
 };
 
-export const FirstDesign = () => <SubmitButton onClick={action('clicked')} insert="inserted"></SubmitButton>;
+export const ToStorybook = () => (
+  <>
+    {' '}
+    <SubmitButton
+    ></SubmitButton>
+  </>
+);
 
-export const SecondDesign = () => <SubmitButton onClick={action('clicked')} insert="Mamma Mia"></SubmitButton>;
+ToStorybook.story = {
+  name: 'Text Input Design no.1'
+};
