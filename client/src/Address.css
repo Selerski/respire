@@ -1,4 +1,19 @@
 .address {
+  width: 500px;
   color: antiquewhite;
   font-size: 1.5em;
+  display: flex;
+  align-items: center; 
+  justify-content: space-around;
+}
+.address > button {
+  width: 100px;
+  height: 28px;
+  border-radius: 3px;
+  border: 0;
+  color: purple;
+}
+.address > button:hover {
+  background-color: purple;
+  color: antiquewhite;
 }

@@ -1,19 +1,22 @@
 .timer {
-  width: 70px;
+  width: 100px;
 }
 
 .timer-content {
-  width: 70px;
-  height: 50px;
-  background-color: burlywood;
+  width: 100px;
+  height: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
 
+  background-color: antiquewhite;
+  color: purple;
+  border-radius: 3px;
 }
 
 .unblock {
-  background-color: cadetblue;
+  background-color: purple;
+  color: antiquewhite;
 }
 
 /*!
