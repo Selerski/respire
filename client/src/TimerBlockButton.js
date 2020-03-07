@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Reveal } from 'semantic-ui-react';
 import './TimerBlockButton.css';
 import formatTime from './utils/formatTime';
 
@@ -10,7 +11,7 @@ const TimerBlockButton = props => {
 
   useEffect(
     () => {
-        if (timeRemaining > 0) {
+        if (timeRemaining > 1) {
             let timer = setTimeout(
                 () => {
                     setTimeRemaining(timeRemaining => timeRemaining - 1);
@@ -28,13 +29,20 @@ const TimerBlockButton = props => {
   if (!timeRemaining) return null;
 
   return (
-    <div>
-      <button className='timer-button' onClick={props.onClick}> 
-        {formatTime(minutes)}:{formatTime(seconds)} 
-      </button>
-    </div>
+    <Reveal animated='fade' className='timer' onClick={props.onClick}>
+      <Reveal.Content visible>
+        <div className="timer-content"> 
+          {formatTime(minutes)}:{formatTime(seconds)} 
+        </div>
+      </Reveal.Content>
+      <Reveal.Content hidden className="timer-content unblock">
+        <div> 
+          unblock
+        </div>
+      </Reveal.Content>
+    </Reveal>
   )
-
 }
+
 
 export default TimerBlockButton;
