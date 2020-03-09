@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import TimerBlockButton from '../TimerBlockButton';
+import TimerBlockButton from '../components/TimerBlockButton';
 
 export default {
   title: 'TimerBlockButton',

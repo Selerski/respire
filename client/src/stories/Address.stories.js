@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import Address from '../Address';
+import Address from '../components/Address';
 
 
 export default {

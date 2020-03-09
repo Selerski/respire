@@ -1,5 +1,5 @@
 import React from 'react';
-import LandingJumbotron from '../Landing-Jumbotron';
+import LandingJumbotron from '../components/Landing-Jumbotron';
 
 export default {
   title: 'Jumbotron',

@@ -1,5 +1,5 @@
 import React from 'react';
-import SubmitButton from '../Submit-Button';
+import SubmitButton from '../components/Submit-Button';
 
 export default {
   component: { SubmitButton },

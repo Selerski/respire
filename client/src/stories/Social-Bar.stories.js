@@ -1,7 +1,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import SocialBar from '../Social-Bar';
-import '../Social-Bar.css';
+import SocialBar from '../components/Social-Bar';
+import '../components/Social-Bar.css';
 
 export default {
   title: 'Social Bar',

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Reveal } from 'semantic-ui-react';
 import './TimerBlockButton.css';
-import formatTime from './utils/formatTime';
+import formatTime from '../utils/formatTime';
 
 const TimerBlockButton = props => {
   const [ timeRemaining, setTimeRemaining ] = useState(props.time);

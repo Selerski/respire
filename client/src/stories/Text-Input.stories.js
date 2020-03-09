@@ -1,8 +1,8 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import TextInput from '../Text-Input';
-import SubmitButton from '../Submit-Button';
-import Timer from '../Timer';
+import TextInput from '../components/Text-Input';
+import SubmitButton from '../components/Submit-Button';
+import Timer from '../components/Timer';
 
 export default {
   component: { TextInput, SubmitButton, Timer },
