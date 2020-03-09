@@ -1,0 +1,79 @@
+.timer {
+  width: 100px;
+}
+
+.timer-content {
+  width: 100px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: antiquewhite;
+  color: purple;
+  border-radius: 3px;
+}
+
+.unblock {
+  background-color: purple;
+  color: antiquewhite;
+}
+
+/*!
+ * # Semantic UI 2.4.1 - Reveal
+ * http://github.com/semantic-org/semantic-ui/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
+
+
+/*******************************
+            Reveal
+*******************************/
+
+.ui.reveal {
+  display: inherit;
+  position: relative !important;
+  font-size: 0em !important;
+}
+.ui.reveal > .visible.content {
+  position: absolute !important;
+  top: 0em !important;
+  left: 0em !important;
+  z-index: 3 !important;
+  -webkit-transition: all 0.25s ease 0.1s;
+  transition: all 0.25s ease 0.1s;
+}
+.ui.reveal > .hidden.content {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Make sure hovered element is on top of other reveal */
+.ui.active.reveal .visible.content,
+.ui.reveal:hover .visible.content {
+  z-index: 4 !important;
+}
+
+/*--------------
+      Fade
+---------------*/
+
+.ui.fade.reveal > .visible.content {
+  opacity: 1;
+}
+.ui.fade.active.reveal > .visible.content,
+.ui.fade.reveal:hover > .visible.content {
+  opacity: 0;
+}
+
+/*--------------
+     Sizing
+---------------*/
+
+.ui.reveal > .content {
+  font-size: 1rem !important;
+}
