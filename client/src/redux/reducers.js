@@ -13,9 +13,9 @@ const addresses = (state = {addresses: []}, action) => {
     case RECEIVE_ADDRESSES:
       return Object.assign({}, state, {addresses: action.addresses});
     case BLOCK_ADDRESS:
-      // state.map(address =>
-      //   address.id === action.id ? { ...address, blockedStatus: '' } : todo
-      // )
+      return state.addresses.map(address =>
+        address.id === action.id ? { ...address, blockedStatus: action.blockedStatus } : address
+      )
     default:
       return state
   }
