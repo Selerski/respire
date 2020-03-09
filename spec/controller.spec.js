@@ -53,8 +53,8 @@ describe("AddressController", function () {
     timedMock = { save: () => {} };
   });
 
-  // it("creates an address");
+  it("creates an address");
 
-  // it("unregisters blocks that are expired");
+  it("unregisters blocks that are expired");
 
 })
