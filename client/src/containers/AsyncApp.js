@@ -7,6 +7,7 @@ import '../components/Social-Bar.css';
 
 
 function AsyncApp(props) {
+  console.log(props)
   const dispatch = useDispatch();
   const addresses = useSelector(state => state.addresses);
 
@@ -37,12 +38,8 @@ function AsyncApp(props) {
           }}
         />
       </div>
-      
       <AddressList
         addresses={addresses.addresses}
-        onClick={() => {
-          console.log('You clicked me!');
-        }}
       />
     </>
   );

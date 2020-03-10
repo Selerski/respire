@@ -16,7 +16,7 @@ const getVisibleAddresses = (addresses, filter) => {
   }
 }
 
-const AddressList = ({addresses, onClick}) => {
+const AddressList = ({addresses}) => {
 
   const visibilityFilter = useSelector(state => state.visibilityFilter);
   const filteredAddresses = getVisibleAddresses(addresses, visibilityFilter);
@@ -27,7 +27,6 @@ const AddressList = ({addresses, onClick}) => {
       <FilterLink filter={visibilityFilter} dispatch={dispatch}/>
       {filteredAddresses.map(address => <Address key={address._id} onClick={onClick} blockedStatus={address.blockedStatus} address={address}/>)}
     </div>
-
   )
 
 }

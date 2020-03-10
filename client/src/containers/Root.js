@@ -4,7 +4,6 @@ import configureStore from '../redux/store';
 import AsyncApp from './AsyncApp';
 
 const store = configureStore();
-window.store = store;
 
 export default function Root() {
   return (

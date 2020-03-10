@@ -1,42 +1,41 @@
 // import fetch from "cross-fetch";
-const baseURL = "http://localhost:3003/addresses";
+const baseURL = 'http://localhost:3003/addresses';
 
-export const ADD_ADDRESS = "ADD_ADDRESS";
-export const BLOCK_ADDRESS = "BLOCK_ADDRESS";
-export const UNBLOCK_ADDRESS = "UNBLOCK_ADDRESS";
-export const REQUEST_ADDRESSES = "REQUEST_ADDRESSES";
-export const RECEIVE_ADDRESSES = "RECEIVE_ADDRESSES";
-export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
+export const ADD_ADDRESS = 'ADD_ADDRESS';
+export const BLOCK_ADDRESS = 'BLOCK_ADDRESS';
+export const UNBLOCK_ADDRESS = 'UNBLOCK_ADDRESS';
+export const REQUEST_ADDRESSES = 'REQUEST_ADDRESSES';
+export const RECEIVE_ADDRESSES = 'RECEIVE_ADDRESSES';
+export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 
 export const VisibilityFilters = {
-  SHOW_ALL: "SHOW_ALL",
-  SHOW_BLOCKED: "SHOW_BLOCKED",
+  SHOW_ALL: 'SHOW_ALL',
+  SHOW_BLOCKED: 'SHOW_BLOCKED'
 };
 
 export const addAddress = address => ({
   type: ADD_ADDRESS,
-  address,
+  address
 });
 
-export const blockAddress = (address, blockedStatus) => ({
+export const blockedAddress = (_id) => ({
   type: BLOCK_ADDRESS,
-  address,
-  blockedStatus,
+  _id
 });
 
-export const unblockAddress = address => ({
+export const unblockedAddress = (_id) => ({
   type: UNBLOCK_ADDRESS,
-  address,
+  _id
 });
 
 export const setVisibilityFilter = filter => ({
   type: SET_VISIBILITY_FILTER,
-  filter,
+  filter
 });
 
 export function requestAddresses() {
   return {
-    type: REQUEST_ADDRESSES,
+    type: REQUEST_ADDRESSES
   };
 }
 
@@ -49,9 +48,29 @@ function receiveAddresses(data) {
 
 export const fetchAddresses = () => dispatch => {
   return fetch(baseURL)
-      .then(
-        response => response.json(),
-      )
-      .then(data => {dispatch(receiveAddresses(data))})
-      .catch(err => console.log('An error occurred.', err))
+    .then(response => response.json())
+    .then(data => {
+      dispatch(receiveAddresses(data));
+    })
+    .catch(err => console.log('An error occurred.', err));
+};
+
+
+export const blockById = (_id) => (dispatch) => {
+  return fetch(`${baseURL}/${_id}/block`, {
+    method: 'PUT'
+  })
+    .then(response => response.json())
+    .then(data => {console.log(`Address ${data.domain} successfully blocked!`); dispatch(blockedAddress(data._id))})
+    .catch(err => console.log('An error occurred.', err));
+};
+
+export const unblockById = (_id) => (dispatch) => {
+    console.log(_id)
+    return fetch(`${baseURL}/${_id}/unblock`, {
+      method: 'PUT'
+    })
+    .then(response => response.json())
+    .then(data => {console.log(`Address ${data.domain} successfully unblocked!`); dispatch(unblockedAddress(data._id))})
+    .catch(err => console.log('An error occurred.', err));
 };
