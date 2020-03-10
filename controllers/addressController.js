@@ -1,31 +1,31 @@
 const Address = require('../models/address');
 
-exports.getAddresses = async (model=Address, ctx) => {
-  const addresses = await model.find();
+exports.getAddresses = async (ctx) => {
+  const addresses = await Address.find();
   ctx.body = addresses;
 };
 
-exports.getAddress = async (model=Address, ctx) => {
-  const address = await model.findById(ctx.params.id);
+exports.getAddress = async (ctx) => {
+  const address = await Address.findById(ctx.params.id);
   ctx.body = address;
 };
 
-exports.blockAddress = async (model=Address, ctx) => {
-  const address = await model.findById(ctx.params.id);
+exports.blockAddress = async (ctx) => {
+  const address = await Address.findById(ctx.params.id);
   address.blockedStatus = 'Blocked';
   await address.save();
   ctx.body = address;
 };
 
-exports.unblockAddress = async (model=Address, ctx) => {
-  const address = await model.findById(ctx.params.id);
+exports.unblockAddress = async (ctx) => {
+  const address = await Address.findById(ctx.params.id);
   address.blockedStatus = 'notBlocked';
   await address.save();
   ctx.body = address;
 };
 
-exports.timeBlockAddress = async (model=Address, date=Date.now(), ctx) => {
-  const address = await model.findById(ctx.params.id);
+exports.timeBlockAddress = async (ctx) => {
+  const address = await Address.findById(ctx.params.id);
   address.blockedStatus = 'timeBlocked';
   address.blockedDate = date;
   address.blockedTimePeriod = ctx.query.time;

@@ -1,6 +1,5 @@
-import fetch from "cross-fetch";
-
-const baseURL = 'http://localhost:3003/addresses'
+// import fetch from "cross-fetch";
+const baseURL = "http://localhost:3003/addresses";
 
 export const ADD_ADDRESS = "ADD_ADDRESS";
 export const BLOCK_ADDRESS = "BLOCK_ADDRESS";
@@ -10,8 +9,8 @@ export const RECEIVE_ADDRESSES = "RECEIVE_ADDRESSES";
 export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 
 export const VisibilityFilters = {
-    SHOW_ALL: "SHOW_ALL",
-    SHOW_BLOCKED: "SHOW_BLOCKED",
+  SHOW_ALL: "SHOW_ALL",
+  SHOW_BLOCKED: "SHOW_BLOCKED",
 };
 
 export const addAddress = address => ({
@@ -19,40 +18,40 @@ export const addAddress = address => ({
   address,
 });
 
-export const blockAddress = address => ({
+export const blockAddress = (address, blockedStatus) => ({
   type: BLOCK_ADDRESS,
-  address
-})
+  address,
+  blockedStatus,
+});
 
 export const unblockAddress = address => ({
   type: UNBLOCK_ADDRESS,
-  address
-})
+  address,
+});
 
 export const setVisibilityFilter = filter => ({
   type: SET_VISIBILITY_FILTER,
   filter,
 });
 
-export function requestPosts() {
+export function requestAddresses() {
   return {
-    type: REQUEST_ADDRESSES
+    type: REQUEST_ADDRESSES,
   };
 }
 
-export function receiveAddresses(json) {
+function receiveAddresses(data) {
   return {
     type: RECEIVE_ADDRESSES,
-    addresses: json.data.children.map(child => child.data),
+    addresses: [...data]
   };
 }
 
-
-function fetchPosts() {
-    return dispatch => {
-      dispatch(requestPosts());
-      return fetch(baseURL)
-        .then(response => response.json())
-        .then(json => dispatch(receivePosts(json)));
-    };
-  }
+export const fetchAddresses = () => dispatch => {
+  return fetch(baseURL)
+      .then(
+        response => response.json(),
+      )
+      .then(data => {dispatch(receiveAddresses(data))})
+      .catch(err => console.log('An error occurred.', err))
+};
