@@ -5,9 +5,9 @@ import { fetchAddresses } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import '../components/Social-Bar.css';
 import InputForm from '../components/InputForm';
+import LandingJumbotron from '../components/Landing-Jumbotron'
 
 function AsyncApp(props) {
-  console.log(props)
   const dispatch = useDispatch();
   const addresses = useSelector(state => state.addresses);
 
@@ -17,27 +17,15 @@ function AsyncApp(props) {
 
   return (
     <>
-      <div
+    
+      <div 
         id="mySidepanel"
-        style={{
-          backgroundColor: '#d1c4e9',
-          width: 'fit-content',
-          padding: '4px 30px 4px 5px',
-
-          opacity: '0.9'
-        }}
       >
         <SocialBar
           size={40}
-          style={{
-            display: 'flex',
-            width: 'fit-content',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
         />
       </div>
+      <LandingJumbotron/>
       <InputForm onSubmit={(formState)=> console.log(formState.value)}/>
       <AddressList
         addresses={addresses.addresses}

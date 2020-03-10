@@ -25,7 +25,7 @@ const AddressList = ({addresses}) => {
   return (
     <div className="address-list">
       <FilterLink filter={visibilityFilter} dispatch={dispatch}/>
-      {filteredAddresses.map(address => <Address key={address._id} onClick={onClick} blockedStatus={address.blockedStatus} address={address}/>)}
+      {filteredAddresses.map(address => <Address key={address._id} blockedStatus={address.blockedStatus} address={address}/>)}
     </div>
   )
 
