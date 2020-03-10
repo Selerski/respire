@@ -3,20 +3,19 @@ import TimePicker from 'rc-time-picker';
 import './Timer.css';
 import moment from 'moment';
 
-
 const format = 'hh:mm';
 
 const iconStyle = {
-    position: 'absolute',
-    width: '24px',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
-  const redoPath =
+  position: 'absolute',
+  width: '24px',
+  right: 0,
+  top: 0,
+  bottom: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
+};
+const redoPath =
   'M758.2 839.1C851.8 765.9 912 651.9 912' +
   ' 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 ' +
   '302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.' +
@@ -37,12 +36,29 @@ function Timer() {
     minutes: moment(0).format('mm')
   });
 
-function onChange(e) {
-    setTimer({ hours: Number(e.format('h')), minutes: Number(e.format('mm')) });
-    localStorage.setItem('hours', Number(e.format('h')) + ':' + Number(e.format('mm')));
+  function onChange(e) {
+    if (e === null) {
+      setTimer({
+        hours: moment(0).format('h'),
+        minutes: moment(0).format('mm')
+      });
+      localStorage.setItem(
+        'hours',
+        moment(0).format('h') + ':' + moment(0).format('mm')
+      );
+    } else {
+      setTimer({
+        hours: Number(e.format('h')),
+        minutes: Number(e.format('mm'))
+      });
+      localStorage.setItem(
+        'hours',
+        Number(e.format('h')) + ':' + Number(e.format('mm'))
+      );
+    }
   }
 
-  function getIcon (path, style = {}) {
+  function getIcon(path, style = {}) {
     return (
       <i
         style={{
@@ -53,7 +69,7 @@ function onChange(e) {
           lineHeight: '1',
           width: '20px',
           transition: 'color 0.3s ease',
-          ...style,
+          ...style
         }}
       >
         <svg
@@ -67,8 +83,8 @@ function onChange(e) {
         </svg>
       </i>
     );
-  };
-  
+  }
+
   const clearIcon = getIcon(redoPath, { ...iconStyle, right: 20 });
 
   return (
@@ -79,7 +95,21 @@ function onChange(e) {
         showSecond={false}
         onChange={onChange}
         format={format}
-        disabledHours={() => [0,12,13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]}
+        disabledHours={() => [
+          0,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]}
         disabledMinutes={() => [0]}
         hideDisabledOptions
       />

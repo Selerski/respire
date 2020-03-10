@@ -1,13 +1,12 @@
 import React from 'react';
 import Address from '../components/Address';
 
-const AddressList = ({addresses, onClick}) => {
+const AddressList = ({addresses}) => {
 
   return (
     <div>
-      {addresses.map(address => <Address key={address.id} onClick={onClick} blockedStatus={address.blockedStatus} address={address}/>)}
+      {addresses.map(address => <Address key={address._id} blockedStatus={address.blockedStatus} address={address}/>)}
     </div>
-
   )
 
 }

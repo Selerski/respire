@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 import {
   ADD_ADDRESS,
   BLOCK_ADDRESS,
@@ -6,28 +6,27 @@ import {
   VisibilityFilters,
   REQUEST_ADDRESSES,
   RECEIVE_ADDRESSES,
-  SET_VISIBILITY_FILTER,
-} from "./actions";
+  SET_VISIBILITY_FILTER
+} from './actions';
 
-const addresses = (state = {addresses: []}, action) => {
-
+const addresses = (state = { addresses: [] }, action) => {
   switch (action.type) {
     case REQUEST_ADDRESSES:
-      return {...state };
+      return { ...state };
     case RECEIVE_ADDRESSES:
-      return {...state, addresses: action.addresses};
+      return { ...state, addresses: action.addresses };
     case BLOCK_ADDRESS:
-      return state.addresses.map(address =>
-        address.id === action.address.id
-          ? { ...address, blockedStatus: action.blockedStatus }
-          : address
-      );
+      return {...state, addresses: state.addresses.map(address => {
+        return address._id === action._id
+          ? { ...address, blockedStatus: 'Blocked' }
+          : address;
+      })};
     case UNBLOCK_ADDRESS:
-      return state.addresses.map(address =>
-        address.id === action.address.id
-          ? { ...address, blockedStatus: "notBlocked" }
-          : address
-      );
+      return {...state, addresses: state.addresses.map(address => {
+        return address._id === action._id
+          ? { ...address, blockedStatus: 'notBlocked' }
+          : address;
+      })};
     default:
       return state;
   }
@@ -44,7 +43,7 @@ const visibilityFilter = (state = VisibilityFilters.SHOW_ALL, action) => {
 
 const rootReducer = combineReducers({
   addresses,
-  visibilityFilter,
+  visibilityFilter
 });
 
 export default rootReducer;

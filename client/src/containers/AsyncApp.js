@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../components/Social-Bar.css';
 
 function AsyncApp(props) {
+  console.log(props)
   const dispatch = useDispatch();
   const addresses = useSelector(state => state.addresses);
   const visibilityFilter = useSelector(state => state.visibilityFilter);
@@ -39,12 +40,9 @@ function AsyncApp(props) {
           }}
         />
       </div>
-      <span onClick = {() => {dispatch({type: SET_VISIBILITY_FILTER, filter: 'SHOW_BLOCKED'})}}>show blocked</span>
+      <span onClick = {() => {dispatch({type: visibilityFilter.SET_VISIBILITY_FILTER, filter: 'SHOW_BLOCKED'})}}>show blocked</span>
       <AddressList
         addresses={addresses.addresses}
-        onClick={() => {
-          console.log('You clicked me!');
-        }}
       />
     </>
   );
