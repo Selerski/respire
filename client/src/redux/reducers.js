@@ -9,12 +9,13 @@ import {
   SET_VISIBILITY_FILTER,
 } from "./actions";
 
-const addresses = (state = { addresses: [] }, action) => {
+const addresses = (state = {addresses: []}, action) => {
+
   switch (action.type) {
     case REQUEST_ADDRESSES:
-      return Object.assign({}, state);
+      return {...state };
     case RECEIVE_ADDRESSES:
-      return Object.assign({}, state, { addresses: action.addresses });
+      return {...state, addresses: action.addresses};
     case BLOCK_ADDRESS:
       return state.addresses.map(address =>
         address.id === action.address.id

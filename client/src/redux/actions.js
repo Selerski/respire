@@ -1,5 +1,6 @@
 // import fetch from "cross-fetch";
 const baseURL = "http://localhost:3003/addresses";
+
 export const ADD_ADDRESS = "ADD_ADDRESS";
 export const BLOCK_ADDRESS = "BLOCK_ADDRESS";
 export const UNBLOCK_ADDRESS = "UNBLOCK_ADDRESS";
@@ -39,20 +40,18 @@ export function requestAddresses() {
   };
 }
 
-export function receiveAddresses(json) {
+function receiveAddresses(data) {
   return {
     type: RECEIVE_ADDRESSES,
-    addresses: json.data.children.map(child => child.data),
+    addresses: [...data]
   };
 }
-
 
 export const fetchAddresses = () => dispatch => {
   return fetch(baseURL)
       .then(
         response => response.json(),
-        error => console.log('An error occurred.', error)
       )
-      .then(json => console.log(json))
+      .then(data => {dispatch(receiveAddresses(data))})
+      .catch(err => console.log('An error occurred.', err))
 };
-window.fetchAddresses = fetchAddresses;
