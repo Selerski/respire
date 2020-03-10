@@ -20,14 +20,14 @@ function Input({ predicted, locked, id, active, value, error, label, onEnter }) 
     }
   }
 
-  const fieldClassName = `field ${(locked
+  const className = `field ${(locked
     ? state.active
     : state.active || state.value) && 'active'} ${locked &&
     !state.active &&
     'locked'}`;
 
   return (
-    <div className={fieldClassName}>
+    <div className={className}>
       {state.active &&
         state.value &&
         predicted &&

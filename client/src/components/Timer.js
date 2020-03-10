@@ -30,33 +30,7 @@ const redoPath =
   ' 9.3-19.1 18-29.3 26L668.2 724c-4.1-5.3-12.5-3.5-14.1' +
   ' 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 0.8c6.7 0 1' +
   '0.5-7.7 6.3-12.9l-37.3-47.9z';
-function Timer() {
-  const [timer, setTimer] = useState({
-    hours: moment(0).format('h'),
-    minutes: moment(0).format('mm')
-  });
-
-  function onChange(e) {
-    if (e === null) {
-      setTimer({
-        hours: moment(0).format('h'),
-        minutes: moment(0).format('mm')
-      });
-      localStorage.setItem(
-        'hours',
-        moment(0).format('h') + ':' + moment(0).format('mm')
-      );
-    } else {
-      setTimer({
-        hours: Number(e.format('h')),
-        minutes: Number(e.format('mm'))
-      });
-      localStorage.setItem(
-        'hours',
-        Number(e.format('h')) + ':' + Number(e.format('mm'))
-      );
-    }
-  }
+function Timer({onChange}) {
 
   function getIcon(path, style = {}) {
     return (
@@ -90,13 +64,12 @@ function Timer() {
   return (
     <>
       <TimePicker
-        defaultValue={moment(0)}
+        defaultValue={null}
         clearIcon={clearIcon}
         showSecond={false}
         onChange={onChange}
         format={format}
         disabledHours={() => [
-          0,
           12,
           13,
           14,
@@ -115,6 +88,6 @@ function Timer() {
       />
     </>
   );
-}
+} 
 
 export default Timer;

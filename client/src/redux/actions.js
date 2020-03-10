@@ -66,7 +66,6 @@ export const blockById = (_id) => (dispatch) => {
 };
 
 export const unblockById = (_id) => (dispatch) => {
-    console.log(_id)
     return fetch(`${baseURL}/${_id}/unblock`, {
       method: 'PUT'
     })
