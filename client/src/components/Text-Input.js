@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Text-Input.css';
 
-function Input({ predicted, locked, id, active, value, error, label }) {
+function Input({ predicted, locked, id, active, value, error, label, onEnter }) {
   const [state, setState] = useState({
     active: (locked && active) || false,
     value: value || '',
@@ -16,7 +16,7 @@ function Input({ predicted, locked, id, active, value, error, label }) {
 
   function handleKeyPress(event) {
     if (event.which === 13) {
-      setState({ ...state, value: 'SUBMIT IS WORKING!' });
+      onEnter({...state});
     }
   }
 
