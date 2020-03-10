@@ -4,7 +4,7 @@ import SocialBar from '../components/Social-Bar';
 import { fetchAddresses } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import '../components/Social-Bar.css';
-
+import InputForm from '../components/InputForm';
 
 function AsyncApp(props) {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function AsyncApp(props) {
           }}
         />
       </div>
-      
+      <InputForm onSubmit={(formState)=> console.log(formState.value)}/>
       <AddressList
         addresses={addresses.addresses}
         onClick={() => {
