@@ -6,10 +6,6 @@
   justify-content: center;
 }
 
-body {background-color: #d1c4e9;
-  margin: 0;
-}
-
 .AsyncApp {
     text-align: center;
     background: #ede7f6; /* fallback for old browsers */

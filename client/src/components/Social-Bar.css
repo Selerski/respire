@@ -11,7 +11,7 @@
   padding: 4px 30px 4px 5px;
   opacity: 0.9;
   position: absolute; /* Position them relative to the browser window */
-  left: -50px; /* Position them outside of the screen */
+  left: -65px; /* Position them outside of the screen */
   transition: 0.2s; /* Add transition on hover */
   padding: 15px; /* 15px padding */
   width: fit-content; /* Set a specific width */
