@@ -18,9 +18,9 @@ export const addAddress = address => ({
   address
 });
 
-export const blockedAddress = (_id) => ({
+export const blockedAddress = (address) => ({
   type: BLOCK_ADDRESS,
-  _id
+  address
 });
 
 export const unblockedAddress = (_id) => ({
@@ -61,7 +61,9 @@ export const blockById = (_id) => (dispatch) => {
     method: 'PUT'
   })
     .then(response => response.json())
-    .then(data => {console.log(`Address ${data.domain} successfully blocked!`); dispatch(blockedAddress(data._id))})
+    .then(data => {
+      console.log(data);
+      console.log(`Address ${data.domain} successfully blocked!`); dispatch(blockedAddress(data))})
     .catch(err => console.log('An error occurred.', err));
 };
 
@@ -73,3 +75,14 @@ export const unblockById = (_id) => (dispatch) => {
     .then(data => {console.log(`Address ${data.domain} successfully unblocked!`); dispatch(unblockedAddress(data._id))})
     .catch(err => console.log('An error occurred.', err));
 };
+
+export const timeBlock = (_id, time) => (dispatch) => {
+  return fetch(`${baseURL}/${_id}/timeblock?time=${time}`, {
+    method: 'PUT'
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(`Address ${data.domain} successfully blocked!`); 
+      dispatch(blockedAddress(data))})
+    .catch(err => console.log('An error occurred.', err));
+}

@@ -17,10 +17,14 @@ const addresses = (state = { addresses: [] }, action) => {
       return { ...state, addresses: action.addresses };
     case BLOCK_ADDRESS:
       return {...state, addresses: state.addresses.map(address => {
-        return address._id === action._id
-          ? { ...address, blockedStatus: 'Blocked' }
-          : address;
-      })};
+        return (address._id === action.address._id
+          ? { ...address, 
+            blockedStatus: action.address.blockedStatus,
+            blockedTimePeriod: action.address.blockedTimePeriod
+          }
+          : address)
+        }
+      )};
     case UNBLOCK_ADDRESS:
       return {...state, addresses: state.addresses.map(address => {
         return address._id === action._id

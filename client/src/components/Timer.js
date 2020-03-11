@@ -30,7 +30,7 @@ const redoPath =
   ' 9.3-19.1 18-29.3 26L668.2 724c-4.1-5.3-12.5-3.5-14.1' +
   ' 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 0.8c6.7 0 1' +
   '0.5-7.7 6.3-12.9l-37.3-47.9z';
-function Timer({onChange}) {
+function Timer({onChange, disabled}) {
 
   function getIcon(path, style = {}) {
     return (
@@ -64,11 +64,13 @@ function Timer({onChange}) {
   return (
     <>
       <TimePicker
-        defaultValue={null}
         clearIcon={clearIcon}
         showSecond={false}
         onChange={onChange}
+        focusOnOpen={true}
+        placeholder='select duration'
         format={format}
+        disabled={disabled}
         disabledHours={() => [
           12,
           13,

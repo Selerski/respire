@@ -14,12 +14,15 @@ exports.blockAddress = async (ctx) => {
   const address = await Address.findById(ctx.params.id);
   address.blockedStatus = 'Blocked';
   await address.save();
+  console.log(address);
   ctx.body = address;
 };
 
 exports.unblockAddress = async (ctx) => {
   const address = await Address.findById(ctx.params.id);
   address.blockedStatus = 'notBlocked';
+  address.blockedDate = null;
+  address.blockedTimePeriod = null;
   await address.save();
   ctx.body = address;
 };
@@ -27,7 +30,7 @@ exports.unblockAddress = async (ctx) => {
 exports.timeBlockAddress = async (ctx) => {
   const address = await Address.findById(ctx.params.id);
   address.blockedStatus = 'timeBlocked';
-  address.blockedDate = date;
+  address.blockedDate = Date.now();
   address.blockedTimePeriod = ctx.query.time;
   await address.save();
   ctx.body = address;
