@@ -1,17 +1,16 @@
 import React from 'react';
 import TextInput from './Text-Input';
-import SubmitButton from './Submit-Button';
-import Timer from './Timer';
 
 export const InputForm = ({onSubmit}) => (
 
 
   <div
     style={{
-      margin: '0 auto',
+      margin: '2rem auto',
       display: 'flex',
       flexDirection: 'row',
       width: '90%',
+      height: "100%",
       alignItems: 'center',
       justifyContent:"center"
     }}
@@ -25,11 +24,6 @@ export const InputForm = ({onSubmit}) => (
       active={false}
       onEnter={onSubmit}
     ></TextInput>
-      <Timer />
-      <SubmitButton
-        onClick={onSubmit}
-        insert="inserted"
-      ></SubmitButton>
   </div>
 );
 

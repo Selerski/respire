@@ -4,23 +4,22 @@
 
 /* Style the links inside the sidenav */
 #mySidepanel {
-  top: 200px;
+  top: 20px;
   background-color: #d1c4e9;
   width: fit-content;
   z-index: 100;
-  padding: 4px 30px 4px 5px;
+  padding: 4px 5px 5px 50px;
   opacity: 0.9;
   position: absolute; /* Position them relative to the browser window */
-  left: -50px; /* Position them outside of the screen */
+  right: -65px; /* Position them outside of the screen */
   transition: 0.2s; /* Add transition on hover */
-  padding: 15px; /* 15px padding */
   width: fit-content; /* Set a specific width */
   text-decoration: none; /* Remove underline */
   font-size: 20px; /* Increase font size */
   color: white; /* White text color */
-  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+  border-radius: 5px 0 0 5px; /* Rounded corners on the top right and bottom right side */
 }
 
 #mySidepanel:hover {
-  left: 0; /* On mouse-over, make the elements appear as they should */
+  right: 0; /* On mouse-over, make the elements appear as they should */
 }

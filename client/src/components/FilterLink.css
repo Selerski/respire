@@ -1,0 +1,28 @@
+span.filter {
+  display: flex;
+  width: 150px;
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #9575cd;
+}
+
+
+.filter-icon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-icon >.icon {
+    justify-self: flex-start;
+}
+
+.filter-icon > p {
+   margin: 0 10px;
+}

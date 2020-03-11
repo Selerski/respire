@@ -6,31 +6,98 @@ import {
   VisibilityFilters,
   REQUEST_ADDRESSES,
   RECEIVE_ADDRESSES,
+  TOGGLE_WIDGET,
   SET_VISIBILITY_FILTER
 } from './actions';
 
-const addresses = (state = { addresses: [] }, action) => {
+const addresses = (
+  state = {
+    addresses: [],
+    widgets: [
+      {
+        fb: false,
+        domain: 'facebook.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      },
+      {
+        lin: false,
+        domain: 'linkedin.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      },
+      {
+        ttr: false,
+        domain: 'twitter.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      },
+      {
+        igm: false,
+        domain: 'instagram.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      },
+      {
+        red: false,
+        domain: 'reddit.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      }
+    ]
+  },
+  action
+) => {
   switch (action.type) {
     case REQUEST_ADDRESSES:
       return { ...state };
     case RECEIVE_ADDRESSES:
       return { ...state, addresses: action.addresses };
     case BLOCK_ADDRESS:
-      return {...state, addresses: state.addresses.map(address => {
-        return (address._id === action.address._id
-          ? { ...address, 
-            blockedStatus: action.address.blockedStatus,
-            blockedTimePeriod: action.address.blockedTimePeriod
-          }
-          : address)
-        }
-      )};
+      return {
+        ...state,
+        widgets: state.widgets.map(item => {
+          return item.domain === action.address.domain
+            ? {
+                ...item,
+                blockedStatus: 'Blocked',
+                [Object.keys(item)[0]]: !item[Object.keys(item)[0]]
+              }
+            : item;
+        }),
+        addresses: state.addresses.map(address => {
+          return address._id === action.address._id
+            ? {
+                ...address,
+                blockedStatus: action.address.blockedStatus,
+                blockedTimePeriod: action.address.blockedTimePeriod
+              }
+            : address;
+        })
+      };
     case UNBLOCK_ADDRESS:
-      return {...state, addresses: state.addresses.map(address => {
-        return address._id === action._id
-          ? { ...address, blockedStatus: 'notBlocked' }
-          : address;
-      })};
+      return {
+        ...state,
+        widgets: state.widgets.map(item => {
+          return item.domain === action.address.domain
+            ? {
+                ...item,
+                blockedStatus: 'notBlocked',
+                [Object.keys(item)[0]]: !item[Object.keys(item)[0]]
+              }
+            : item;
+        }),
+        addresses: state.addresses.map(address => {
+          return address._id === action.address._id
+            ? { ...address, blockedStatus: 'notBlocked' }
+            : address;
+        })
+      };
     default:
       return state;
   }
