@@ -4,12 +4,14 @@ import './TimerBlockButton.css';
 import formatTime from '../utils/formatTime';
 import { useDispatch } from 'react-redux';
 import { unblockById } from '../redux/actions';
+import moment from 'moment';
 
 const TimerBlockButton = props => {
   const dispatch = useDispatch();
   const [timeRemaining, setTimeRemaining] = useState(props.time);
 
-  const minutes = Math.floor(timeRemaining / 60);
+  const hours = Math.floor(timeRemaining / 3600);
+  const minutes = Math.floor(timeRemaining % 3600 / 60);
   const seconds = Math.floor(timeRemaining % 60);
 
   useEffect(
@@ -36,7 +38,7 @@ const TimerBlockButton = props => {
         <div className="timer-content">
           {timeRemaining === 999999 
           ? '♾'
-          : formatTime(minutes)+ ':' +formatTime(seconds)}
+          : formatTime(hours)+':'+formatTime(minutes)+ ':' +formatTime(seconds)}
         </div>
       </Reveal.Content>
       <Reveal.Content hidden className="timer-content unblock">

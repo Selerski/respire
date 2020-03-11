@@ -18,25 +18,25 @@ const Address = ({ address, blockedStatus, children, onClick }) => {
     untimed: () => [...Array(60).keys()].map(i => i),
     timed: () => [0]
   };
-
   const [timer, setTimer] = useState({
     hours: null,
     minutes: null,
     indefinite: false
   });
+ 
   function handleCheckbox(e) {
     setTimer({ ...timer, indefinite: !timer.indefinite });
   }
   function handleSetTimer(e) {
     if (e === null) {
       setTimer({
-        hours: moment(0).format('h'),
+        hours: moment(0).format('HH'),
         minutes: moment(0).format('mm')
       });
 
     } else {
       setTimer({
-        hours: Number(e.format('h')),
+        hours: Number(e.format('HH')),
         minutes: Number(e.format('mm'))
       });
     }
