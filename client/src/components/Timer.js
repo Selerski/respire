@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TimePicker from 'rc-time-picker';
+import TimePicker from './time-picker-clone';
 import './Timer.css';
 import moment from 'moment';
 
