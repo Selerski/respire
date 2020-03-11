@@ -128,3 +128,14 @@ export const timeBlock = (_id, time) => dispatch => {
     })
     .catch(err => console.log('An error occurred.', err));
 };
+
+export const timeBlock = (_id, time) => (dispatch) => {
+  return fetch(`${baseURL}/${_id}/timeblock?time=${time}`, {
+    method: 'PUT'
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(`Address ${data.domain} successfully blocked!`); 
+      dispatch(blockedAddress(data))})
+    .catch(err => console.log('An error occurred.', err));
+}

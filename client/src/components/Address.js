@@ -33,6 +33,7 @@ const Address = ({ address, blockedStatus, children, onClick }) => {
         hours: moment(0).format('h'),
         minutes: moment(0).format('mm')
       });
+
     } else {
       setTimer({
         hours: Number(e.format('h')),
