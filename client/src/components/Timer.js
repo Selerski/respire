@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import TimePicker from './time-picker-clone';
+import TimePicker from 'rc-time-picker';
 import './Timer.css';
 import moment from 'moment';
 
-const format = 'hh:mm';
+const format = 'HH:mm';
 
 const iconStyle = {
   position: 'absolute',
