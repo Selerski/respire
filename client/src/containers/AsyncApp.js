@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AddressList from './AddressList';
 import SocialBar from '../components/Social-Bar';
 import { fetchAddresses } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import '../components/Social-Bar.css';
-import InputForm from '../components/InputForm';
 import LandingJumbotron from '../components/Landing-Jumbotron'
 import './AsyncApp.css'
 
@@ -30,7 +29,7 @@ function AsyncApp(props) {
         />
       </div>
       <LandingJumbotron/>
-      <InputForm onSubmit={(formState) => console.log(formState.value)}/>
+      {/* <InputForm onSubmit={(formState)=> console.log(formState.value)}/> */}
       <AddressList
         addresses={addresses.addresses}
       />
