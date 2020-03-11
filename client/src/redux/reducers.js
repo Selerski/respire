@@ -10,7 +10,49 @@ import {
   SET_VISIBILITY_FILTER
 } from './actions';
 
-const addresses = (state = { addresses: [] }, action) => {
+const addresses = (
+  state = {
+    addresses: [],
+    widgets: [
+      {
+        fb: false,
+        domain: 'facebook.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      },
+      {
+        lin: false,
+        domain: 'linkedin.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      },
+      {
+        ttr: false,
+        domain: 'twitter.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      },
+      {
+        igm: false,
+        domain: 'instagram.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      },
+      {
+        red: false,
+        domain: 'reddit.com',
+        https: true,
+        port: 443,
+        blockedStatus: 'notBlocked'
+      }
+    ]
+  },
+  action
+) => {
   switch (action.type) {
     case REQUEST_ADDRESSES:
       return { ...state };
@@ -19,74 +61,43 @@ const addresses = (state = { addresses: [] }, action) => {
     case BLOCK_ADDRESS:
       return {
         ...state,
+        widgets: state.widgets.map(item => {
+          return item.domain === action.address.domain
+            ? {
+                ...item,
+                blockedStatus: 'Blocked',
+                [Object.keys(item)[0]]: !item[Object.keys(item)[0]]
+              }
+            : item;
+        }),
         addresses: state.addresses.map(address => {
-          return address._id === action._id
-            ? { ...address, blockedStatus: 'Blocked' }
+          return address._id === action.address._id
+            ? {
+                ...address,
+                blockedStatus: action.address.blockedStatus,
+                blockedTimePeriod: action.address.blockedTimePeriod
+              }
             : address;
         })
       };
     case UNBLOCK_ADDRESS:
       return {
         ...state,
+        widgets: state.widgets.map(item => {
+          return item.domain === action.address.domain
+            ? {
+                ...item,
+                blockedStatus: 'notBlocked',
+                [Object.keys(item)[0]]: !item[Object.keys(item)[0]]
+              }
+            : item;
+        }),
         addresses: state.addresses.map(address => {
-          return address._id === action._id
+          return address._id === action.address._id
             ? { ...address, blockedStatus: 'notBlocked' }
             : address;
         })
       };
-    default:
-      return state;
-  }
-};
-
-const toggleWidget = (
-  state = { widgets: [
-    {
-      fb: false,
-      domain: 'facebook.com',
-      https: true,
-      port: 443,
-      blockedStatus: 'notBlocked'
-    },
-    {
-      lin: false,
-      domain: 'linkedin.com',
-      https: true,
-      port: 443,
-      blockedStatus: 'notBlocked'
-    },
-    {
-      ttr: false,
-      domain: 'twitter.com',
-      https: true,
-      port: 443,
-      blockedStatus: 'notBlocked'
-    },
-    {
-      igm: false,
-      domain: 'instagram.com',
-      https: true,
-      port: 443,
-      blockedStatus: 'notBlocked'
-    },
-    {
-      red: false,
-      domain: 'reddit.com',
-      https: true,
-      port: 443,
-      blockedStatus: 'notBlocked'
-    }
-  ]},
-  action
-) => {
-  switch (action.type) {
-
-    case TOGGLE_WIDGET:
-      return {...state, 
-        widgets: state.widgets.map(item => (Object.keys(item).includes(action.id)) 
-          ? { ...item, blockedStatus: 'Blocked', [action.id]: !item[action.id] }
-          : item)
-      }
     default:
       return state;
   }
@@ -103,7 +114,6 @@ const visibilityFilter = (state = VisibilityFilters.SHOW_ALL, action) => {
 
 const rootReducer = combineReducers({
   addresses,
-  toggleWidget,
   visibilityFilter
 });
 

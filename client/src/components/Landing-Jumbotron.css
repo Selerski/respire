@@ -1,7 +1,7 @@
 .jumbotron-container {
   font-family: 'Chakra Petch', sans-serif;
   color: #673ab7;
-  padding: 64px 32px;
+  padding: 64px 32px 5px 32px;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -20,18 +20,27 @@
   line-height: 1.2;
 }
 
-p.slogan-1 {
+p.slogan-1, p.slogan-2 {
   font-size: 1.25rem;
   font-weight: 300;
   margin-top: 0;
   margin-bottom: 1rem;
 }
 
-p.slogan-2 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 16px;
+.slogan-1 {
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
 }
+
+.slogan-2 {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 
 hr.line {
   border: 1px solid #dcdcdc;

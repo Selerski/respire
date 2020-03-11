@@ -14,7 +14,7 @@ const TimerBlockButton = props => {
 
   useEffect(
     () => {
-      if (timeRemaining >= 1) {
+      if (timeRemaining >= 1 && timeRemaining !== 999999) {
         let timer = setTimeout(() => {
           setTimeRemaining(timeRemaining => timeRemaining - 1);
           if (timeRemaining === 1) {
@@ -34,7 +34,9 @@ const TimerBlockButton = props => {
     <Reveal animated="fade" className="timer" onClick={() => dispatch(unblockById(props._id))}>
       <Reveal.Content visible>
         <div className="timer-content">
-          {formatTime(minutes)}:{formatTime(seconds)}
+          {timeRemaining === 999999 
+          ? '♾'
+          : formatTime(minutes)+ ':' +formatTime(seconds)}
         </div>
       </Reveal.Content>
       <Reveal.Content hidden className="timer-content unblock">

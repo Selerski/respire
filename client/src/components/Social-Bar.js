@@ -3,14 +3,13 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import RedditIcon from '@material-ui/icons/Reddit';
-import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { blockWidget, unblockWidget } from '../redux/actions';
 
 function SocialBar({ size }, props) {
   const dispatch = useDispatch();
-  const widgets = useSelector(state => state.toggleWidget.widgets);
+  const widgets = useSelector(state => state.addresses.widgets);
 
   function handleClick(e) {
     e.preventDefault();

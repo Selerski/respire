@@ -21,30 +21,16 @@ export const addAddress = address => ({
   address
 });
 
-export const blockedAddress = (_id) => ({
+export const blockedAddress = address => ({
   type: BLOCK_ADDRESS,
-  _id
+  address
 });
 
-export const unblockedAddress = (_id) => ({
+export const unblockedAddress = (address) => ({
   type: UNBLOCK_ADDRESS,
-  _id
+  address
 });
 
-export const toggleWidget = (id) => ({
-  type: TOGGLE_WIDGET,
-  id
-})
-
-export const blockedWidgetAddress = (domain) => ({
-  type: BLOCK_WIDGET_ADDRESS,
-  domain
-});
-
-export const unblockedWidgetAddress = (domain) => ({
-  type: UNBLOCK_WIDGET_ADDRESS,
-  domain
-});
 
 export const setVisibilityFilter = filter => ({
   type: SET_VISIBILITY_FILTER,
@@ -73,41 +59,72 @@ export const fetchAddresses = () => dispatch => {
     .catch(err => console.log('An error occurred.', err));
 };
 
-
-export const blockById = (_id) => (dispatch) => {
+export const blockById = _id => dispatch => {
   return fetch(`${baseURL}/${_id}/block`, {
     method: 'PUT'
   })
     .then(response => response.json())
-    .then(data => {dispatch(blockedAddress(data._id))})
-    .catch(err => console.log('An error occurred.', err));
-};
-
-export const unblockById = (_id) => (dispatch) => {
-    return fetch(`${baseURL}/${_id}/unblock`, {
-      method: 'PUT'
+    .then(data => {
+      console.log(data);
+      console.log(`Address ${data.domain} successfully blocked!`);
+      dispatch(blockedAddress(data));
     })
-    .then(response => response.json())
-    .then(data => {dispatch(unblockedAddress(data._id))})
     .catch(err => console.log('An error occurred.', err));
 };
 
-export const blockWidget = ({domain,https,port,blockedStatus}, id) => (dispatch) => {
-    return fetch(`${baseURL}/widget/domain=${domain}&https=${https}&port=${port}&blockedStatus=${blockedStatus}`, {
-      method: 'PUT'
+export const unblockById = _id => dispatch => {
+  return fetch(`${baseURL}/${_id}/unblock`, {
+    method: 'PUT'
+  })
+    .then(response => response.json())
+    .then(data => {
+      dispatch(unblockedAddress(data));
     })
-    .then(response => response.json())
-    .then(data => {return dispatch(blockById(data._id))}).then(() => dispatch(toggleWidget(id)))
     .catch(err => console.log('An error occurred.', err));
 };
 
-export const unblockWidget = ({domain,https,port,blockedStatus}, id) => (dispatch) => {
-    return fetch(`${baseURL}/widget/domain=${domain}&https=${https}&port=${port}&blockedStatus=${blockedStatus}`, {
+export const blockWidget = (
+  { domain, https, port, blockedStatus },
+  id
+) => dispatch => {
+  return fetch(
+    `${baseURL}/widget/domain=${domain}&https=${https}&port=${port}&blockedStatus=${blockedStatus}`,
+    {
       method: 'PUT'
-    })
+    }
+  )
     .then(response => response.json())
-    .then(data => {return dispatch(unblockById(data._id))}).then(() => dispatch(toggleWidget(id)))
+    .then(data => {
+      dispatch(blockById(data._id));
+    })
     .catch(err => console.log('An error occurred.', err));
 };
 
+export const unblockWidget = (
+  { domain, https, port, blockedStatus },
+  id
+) => dispatch => {
+  return fetch(
+    `${baseURL}/widget/domain=${domain}&https=${https}&port=${port}&blockedStatus=${blockedStatus}`,
+    {
+      method: 'PUT'
+    }
+  )
+    .then(response => response.json())
+    .then(data => {
+      dispatch(unblockById(data._id));
+    })
+    .catch(err => console.log('An error occurred.', err));
+};
 
+export const timeBlock = (_id, time) => dispatch => {
+  return fetch(`${baseURL}/${_id}/timeblock?time=${time}`, {
+    method: 'PUT'
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(`Address ${data.domain} successfully blocked!`);
+      dispatch(blockedAddress(data, data.domain));
+    })
+    .catch(err => console.log('An error occurred.', err));
+};

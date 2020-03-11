@@ -11,6 +11,7 @@ function SubmitButton(props) {
         variant="contained"
         color="secondary"
         startIcon={<BlockIcon />}
+        onClick={props.onClick}
       >
         Block
       </Button>

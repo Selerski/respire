@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../components/Social-Bar.css';
 import InputForm from '../components/InputForm';
 import LandingJumbotron from '../components/Landing-Jumbotron'
+import './AsyncApp.css'
 
 function AsyncApp(props) {
 
