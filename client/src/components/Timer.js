@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TimePicker from 'rc-time-picker';
 import './Timer.css';
-import moment from 'moment';
 
 const format = 'HH:mm';
 

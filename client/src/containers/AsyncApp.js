@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import AddressList from './AddressList';
 import SocialBar from '../components/Social-Bar';
 import { fetchAddresses } from '../redux/actions';
@@ -7,20 +7,18 @@ import '../components/Social-Bar.css';
 import LandingJumbotron from '../components/Landing-Jumbotron'
 import './AsyncApp.css'
 
-function AsyncApp(props) {
+function AsyncApp() {
 
   const dispatch = useDispatch();
   const addresses = useSelector(state => state.addresses);
 
-
   useEffect(() => {
     dispatch(fetchAddresses());
-  }, []);
+  }, [dispatch]);
   
 
   return (
     <>
-    
       <div 
         id="mySidepanel"
       >
@@ -29,7 +27,6 @@ function AsyncApp(props) {
         />
       </div>
       <LandingJumbotron/>
-      {/* <InputForm onSubmit={(formState)=> console.log(formState.value)}/> */}
       <AddressList
         addresses={addresses.addresses}
       />

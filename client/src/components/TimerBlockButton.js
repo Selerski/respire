@@ -4,7 +4,6 @@ import './TimerBlockButton.css';
 import formatTime from '../utils/formatTime';
 import { useDispatch } from 'react-redux';
 import { unblockById } from '../redux/actions';
-import moment from 'moment';
 
 const TimerBlockButton = props => {
   const dispatch = useDispatch();
@@ -27,7 +26,7 @@ const TimerBlockButton = props => {
       }
     },
     // if this value changes, clear the timer and rerender
-    [timeRemaining]
+    [timeRemaining, dispatch, props._id]
   );
 
   if (!timeRemaining) return null;

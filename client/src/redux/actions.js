@@ -66,8 +66,6 @@ export const blockById = _id => dispatch => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      console.log(`Address ${data.domain} successfully blocked!`);
       dispatch(blockedAddress(data));
     })
     .catch(err => console.log('An error occurred.', err));
@@ -124,7 +122,6 @@ export const timeBlock = (_id, time) => (dispatch) => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(`Address ${data.domain} successfully blocked!`); 
       dispatch(blockedAddress(data))})
     .catch(err => console.log('An error occurred.', err));
 }

@@ -10,14 +10,7 @@ import moment from 'moment';
 
 const Address = ({ address, blockedStatus, children, onClick }) => {
   const dispatch = useDispatch();
-  const disabledHours = {
-    untimed: () => [...Array(23).keys()].map(i => i + 12),
-    timed: () => [...Array(23).keys()].map(i => i + 1)
-  };
-  const disabledMinutes = {
-    untimed: () => [...Array(60).keys()].map(i => i),
-    timed: () => [0]
-  };
+
   const [timer, setTimer] = useState({
     hours: null,
     minutes: null,

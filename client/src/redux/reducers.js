@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
 import {
-  ADD_ADDRESS,
   BLOCK_ADDRESS,
   UNBLOCK_ADDRESS,
   VisibilityFilters,
   REQUEST_ADDRESSES,
   RECEIVE_ADDRESSES,
-  TOGGLE_WIDGET,
   SET_VISIBILITY_FILTER
 } from './actions';
 

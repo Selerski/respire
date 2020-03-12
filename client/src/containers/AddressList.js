@@ -8,42 +8,50 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import FilterForm from '../components/FilterForm';
 
 const getVisibleAddresses = (addresses, filter, searchString) => {
-  console.log('search string:', searchString);
   switch (filter) {
     case VisibilityFilters.SHOW_ALL:
       return addresses;
     case VisibilityFilters.SHOW_BLOCKED:
-      return addresses.filter(a => a.blockedStatus === 'Blocked')
+      return addresses.filter(a => a.blockedStatus === 'Blocked');
     case VisibilityFilters.SHOW_SEARCHED:
-      if (!searchString || searchString.length === 0) {return addresses}
+      if (!searchString || searchString.length === 0) {
+        return addresses;
+      }
       return addresses.filter(a => {
-        return a.domain.indexOf(searchString.toLowerCase()) !== -1});
+        if (a.domain) {
+          return a.domain.indexOf(searchString.toLowerCase()) !== -1;
+        }
+        return null;
+      });
+
     default:
       throw new Error('Unknown filter: ' + filter);
   }
-};
-const style = {
-  fontWeight: 'bold'
 };
 
 const AddressList = ({ addresses }) => {
   const [searchString, setSearchString] = useState(null);
   const visibilityFilter = useSelector(state => state.visibilityFilter);
-  const filteredAddresses = getVisibleAddresses(addresses, visibilityFilter, searchString);
+  const filteredAddresses = getVisibleAddresses(
+    addresses,
+    visibilityFilter,
+    searchString
+  );
   const dispatch = useDispatch();
-  
-  function handleSearch (str) {
+
+  function handleSearch(str) {
     if (str.length < 1) {
-      dispatch({type: SET_VISIBILITY_FILTER, filter: 'SHOW_ALL'})
+      dispatch({ type: SET_VISIBILITY_FILTER, filter: 'SHOW_ALL' });
       setSearchString(null);
-      return
+      return;
     }
     setSearchString(str);
-    dispatch({type: SET_VISIBILITY_FILTER, filter: 'SHOW_SEARCHED'});
+    dispatch({ type: SET_VISIBILITY_FILTER, filter: 'SHOW_SEARCHED' });
   }
 
   return (
     <>
+      <FilterForm onFilter={handleSearch} />
       <StickyContainer className="sticky-container">
         <Sticky>
           {({ style }) => (
@@ -61,19 +69,23 @@ const AddressList = ({ addresses }) => {
             >
               <div className="name">Domain</div>
               <div className="block">Timed? (Y/N)</div>
-              <div className="time">Duration</div>
-              <FilterLink filter={visibilityFilter} dispatch={dispatch}/>
+              <div className="time">Duration (h:m) </div>
+              <FilterLink filter={visibilityFilter} dispatch={dispatch} />
             </div>
           )}
         </Sticky>
       </StickyContainer>
-    <div className="list-container">
-      <div className="address-list">
-        <FilterForm onFilter={handleSearch}/>
-        <FilterLink filter={visibilityFilter} dispatch={dispatch}/>
-        {filteredAddresses.map(address => <Address key={address._id} blockedStatus={address.blockedStatus} address={address}/>)}
+      <div className="list-container">
+        <div className="address-list">
+          {filteredAddresses.map(address => (
+            <Address
+              key={address._id}
+              blockedStatus={address.blockedStatus}
+              address={address}
+            />
+          ))}
+        </div>
       </div>
-    </div>
     </>
   );
 };

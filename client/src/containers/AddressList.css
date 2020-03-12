@@ -52,6 +52,15 @@ div.empty {
   width: 25%;
 }
 
+div.name,
+div.block,
+div.time {
+  font-family: 'Chakra Petch';
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+
 div.empty {
   height: 100%;
 }
