@@ -8,17 +8,17 @@ import { Checkbox, Segment } from 'semantic-ui-react';
 import SubmitButton from './Submit-Button';
 import moment from 'moment';
 
-const Address = ({ address, blockedStatus, children, onClick }) => {
+const Address = ({ address, blockedStatus, children }) => {
   const dispatch = useDispatch();
 
   const [timer, setTimer] = useState({
     hours: null,
     minutes: null,
-    indefinite: false
+    timed: false
   });
- 
+
   function handleCheckbox(e) {
-    setTimer({ ...timer, indefinite: !timer.indefinite });
+    setTimer({ ...timer, timed: !timer.timed });
   }
   function handleSetTimer(e) {
     if (e === null) {
@@ -26,7 +26,6 @@ const Address = ({ address, blockedStatus, children, onClick }) => {
         hours: moment(0).format('HH'),
         minutes: moment(0).format('mm')
       });
-
     } else {
       setTimer({
         hours: Number(e.format('HH')),
@@ -36,14 +35,14 @@ const Address = ({ address, blockedStatus, children, onClick }) => {
   }
 
   function handleBlock() {
-    if (timer.hours === null && timer.minutes === null) {
+    if ((timer.hours === null && timer.minutes === null) || timer.timed === false) {
       dispatch(blockById(address._id));
     } else {
       dispatch(
         timeBlock(address._id, (+timer.hours * 60 + timer.minutes) * 60)
       );
     }
-    setTimer({ hours: null, minutes: null, indefinite: false });
+    setTimer({ hours: null, minutes: null, timed: false });
   }
 
   const buttonPanel =
@@ -52,14 +51,10 @@ const Address = ({ address, blockedStatus, children, onClick }) => {
         {' '}
         <div className="checkbox">
           <Segment compact>
-            <Checkbox
-              toggle
-              checked={timer.indefinite}
-              onChange={handleCheckbox}
-            />
+            <Checkbox toggle checked={timer.timed} onChange={handleCheckbox} />
           </Segment>
         </div>
-        <Timer onChange={handleSetTimer} disabled={timer.indefinite} />
+        <Timer onChange={handleSetTimer} disabled={timer.timed === false} />
         <SubmitButton onClick={handleBlock} />
       </>
     ) : (

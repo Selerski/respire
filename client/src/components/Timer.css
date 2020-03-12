@@ -57,12 +57,19 @@
     background: #f7f7f7;
     cursor: not-allowed;
   }
+  .rc-time-picker-input::placeholder {
+    text-align: center;
+    font-size: 1rem;
+  }
   .rc-time-picker-panel {
     z-index: 1070;
     width: 200px;
     position: absolute;
     box-sizing: border-box;
   }
+
+  .rc-time-picker-input
+
   .rc-time-picker-panel * {
     box-sizing: border-box;
   }

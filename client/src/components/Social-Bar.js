@@ -3,13 +3,31 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import RedditIcon from '@material-ui/icons/Reddit';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { blockWidget, unblockWidget } from '../redux/actions';
 
 function SocialBar({ size }, props) {
   const dispatch = useDispatch();
+  const addresses = useSelector(state => state.addresses.addresses);
   const widgets = useSelector(state => state.addresses.widgets);
+
+  useEffect(() => {
+    console.log(addresses, widgets)
+    if (addresses.length!==0 && widgets) {
+      console.log(addresses, widgets)
+      widgets.forEach(widget => {
+        const findWidget = addresses.find((address) => {
+          if (address.domain === widget.domain && address.port === widget.port && address.domain) {
+            return address
+          }
+        });
+        if (findWidget && findWidget.blockedStatus !== 'notBlocked') {
+          dispatch(blockWidget(widget, Object.keys(widget)[0]));
+        }
+      });
+    }
+  },[]);
 
   function handleClick(e) {
     e.preventDefault();
@@ -31,7 +49,7 @@ function SocialBar({ size }, props) {
         <FacebookIcon
           style={{
             fontSize: size,
-            color: fb.fb || all ? 'red' : 'white',
+            color: fb.fb || all ? '#ef5350' : 'white',
             pointerEvents: 'none'
           }}
         />
@@ -40,7 +58,7 @@ function SocialBar({ size }, props) {
         <LinkedInIcon
           style={{
             fontSize: size,
-            color: lin.lin || all ? 'red' : 'white',
+            color: lin.lin || all ? '#ef5350' : 'white',
             pointerEvents: 'none'
           }}
         />
@@ -49,7 +67,7 @@ function SocialBar({ size }, props) {
         <TwitterIcon
           style={{
             fontSize: size,
-            color: ttr.ttr || all ? 'red' : 'white',
+            color: ttr.ttr || all ? '#ef5350' : 'white',
             pointerEvents: 'none'
           }}
         />
@@ -58,7 +76,7 @@ function SocialBar({ size }, props) {
         <InstagramIcon
           style={{
             fontSize: size,
-            color: igm.igm || all ? '#f4511e' : 'white',
+            color: igm.igm || all ? '#ef5350' : 'white',
             pointerEvents: 'none'
           }}
         />
@@ -67,7 +85,7 @@ function SocialBar({ size }, props) {
         <RedditIcon
           style={{
             fontSize: size,
-            color: red.red || all ? '#f4511e' : 'white',
+            color: red.red || all ? '#ef5350' : 'white',
             pointerEvents: 'none'
           }}
         />

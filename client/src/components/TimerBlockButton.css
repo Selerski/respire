@@ -1,78 +1,38 @@
 .timer {
-  width: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 75%;
+  height: 56px;
+}
+
+div.timer > button {
+  border-radius: 10px;
+  margin: 0 15px;
+  padding: 0px 16px;
+  font-size: 0.875rem;
+  width: 50%;
+  background-color: #00e676;
+}
+div.timer > button:hover {
+  background-color: #00c853;
 }
 
 .timer-content {
-  width: 100px;
-  height: 28px;
+  width: 50%;
+  padding: 6px 20px;
+  height: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: antiquewhite;
-  color: purple;
+  background-color: white;
+  font-weight: bold;
+  font-family: 'Chakra Petch';
+  color: #512da8;
   border-radius: 3px;
 }
 
-.unblock {
-  background-color: purple;
-  color: antiquewhite;
-}
-
-/*!
- * # Semantic UI 2.4.1 - Reveal
- * http://github.com/semantic-org/semantic-ui/
- *
- *
- * Released under the MIT license
- * http://opensource.org/licenses/MIT
- *
- */
-
-
-/*******************************
-            Reveal
-*******************************/
-
-.ui.reveal {
-  display: inherit;
-  position: relative !important;
-  font-size: 0em !important;
-}
-.ui.reveal > .visible.content {
-  position: absolute !important;
-  top: 0em !important;
-  left: 0em !important;
-  z-index: 3 !important;
-  -webkit-transition: all 0.25s ease 0.1s;
-  transition: all 0.25s ease 0.1s;
-}
-.ui.reveal > .hidden.content {
-  position: relative !important;
-  z-index: 2 !important;
-}
-
-/* Make sure hovered element is on top of other reveal */
-.ui.active.reveal .visible.content,
-.ui.reveal:hover .visible.content {
-  z-index: 4 !important;
-}
-
-/*--------------
-      Fade
----------------*/
-
-.ui.fade.reveal > .visible.content {
-  opacity: 1;
-}
-.ui.fade.active.reveal > .visible.content,
-.ui.fade.reveal:hover > .visible.content {
-  opacity: 0;
-}
-
-/*--------------
-     Sizing
----------------*/
-
-.ui.reveal > .content {
-  font-size: 1rem !important;
+div.timer-content {
+  width: 100%;
 }

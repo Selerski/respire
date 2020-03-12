@@ -9,7 +9,6 @@
   width: fit-content;
   z-index: 100;
   padding: 4px 5px 5px 50px;
-  opacity: 0.9;
   position: absolute; /* Position them relative to the browser window */
   right: -65px; /* Position them outside of the screen */
   transition: 0.2s; /* Add transition on hover */

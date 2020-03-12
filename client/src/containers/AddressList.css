@@ -28,6 +28,8 @@ div.address {
 }
 
 .sticky-container {
+  width: 90%;
+  margin: 0 2rem;
   position: -webkit-sticky;
   background-color: white;
   color: #673ab7;
@@ -63,4 +65,8 @@ div.time {
 
 div.empty {
   height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-items: flex-start;
 }

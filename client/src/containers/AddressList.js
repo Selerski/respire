@@ -61,9 +61,7 @@ const AddressList = ({ addresses }) => {
                 left: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                width: '90%',
                 borderBottom: '1px #673ab7 solid',
-                margin: '0 2rem',
                 height: '50px'
               }}
             >
