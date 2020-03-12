@@ -14,7 +14,6 @@ exports.blockAddress = async ctx => {
   const address = await Address.findById(ctx.params.id);
   address.blockedStatus = 'Blocked';
   await address.save();
-  console.log(address);
   ctx.body = address;
 };
 
