@@ -8,54 +8,55 @@ import {
   SET_VISIBILITY_FILTER
 } from './actions';
 
-const addresses = (
-  state = {
-    addresses: [],
-    widgets: [
-      {
-        fb: false,
-        domain: 'facebook.com',
-        https: true,
-        port: 443,
-        blockedStatus: 'notBlocked'
-      },
-      {
-        lin: false,
-        domain: 'linkedin.com',
-        https: true,
-        port: 443,
-        blockedStatus: 'notBlocked'
-      },
-      {
-        ttr: false,
-        domain: 'twitter.com',
-        https: true,
-        port: 443,
-        blockedStatus: 'notBlocked'
-      },
-      {
-        igm: false,
-        domain: 'instagram.com',
-        https: true,
-        port: 443,
-        blockedStatus: 'notBlocked'
-      },
-      {
-        red: false,
-        domain: 'reddit.com',
-        https: true,
-        port: 443,
-        blockedStatus: 'notBlocked'
-      }
-    ]
-  },
-  action
-) => {
+const initialState = {
+  isFetching: false,
+  receivedAt: Date.now(),
+  addresses: [],
+  widgets: [
+    {
+      fb: false,
+      domain: 'facebook.com',
+      https: true,
+      port: 443,
+      blockedStatus: 'notBlocked'
+    },
+    {
+      lin: false,
+      domain: 'linkedin.com',
+      https: true,
+      port: 443,
+      blockedStatus: 'notBlocked'
+    },
+    {
+      ttr: false,
+      domain: 'twitter.com',
+      https: true,
+      port: 443,
+      blockedStatus: 'notBlocked'
+    },
+    {
+      igm: false,
+      domain: 'instagram.com',
+      https: true,
+      port: 443,
+      blockedStatus: 'notBlocked'
+    },
+    {
+      red: false,
+      domain: 'reddit.com',
+      https: true,
+      port: 443,
+      blockedStatus: 'notBlocked'
+    }
+  ]
+}
+
+const addresses = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_ADDRESSES:
-      return { ...state };
+      return { ...state, isFetching: true };
     case RECEIVE_ADDRESSES:
-      return { ...state, addresses: action.addresses };
+      return { ...state, addresses: action.addresses, receivedAt: action.receivedAt, isFetching: false };
     case BLOCK_ADDRESS:
       return {
         ...state,
